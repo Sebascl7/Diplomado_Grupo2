@@ -1,5 +1,9 @@
 # 📊 DIPLOMADO BI GRUPO 2
 
+## URL
+
+https://app.powerbi.com/view?r=eyJrIjoiN2UxNmM0MTQtZWUyMS00MWU0LWI2MDctZTYwNmNhMWYyODIyIiwidCI6ImQ0YzI3ZTJkLWNkNzAtNDg3MS1iODZiLWVjNmMyOWQ0YjMzYSIsImMiOjR9
+
 ## Este es nuestro Script de creacion de tablas de la base de datos en SQL
 
 [Script de creacion de tablas](CreacionTablas/ScripCreacion.txt)
