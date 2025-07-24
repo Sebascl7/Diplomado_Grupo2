@@ -2,7 +2,7 @@
 
 ## Este es nuestro Script de creacion de tablas de la base de datos en SQL
 
-[CODIGO SQL - GRUPO 2 Rev0.sql](CODIGO%20SQL%20%20-%20GRUPO%202%20Rev0.sql)
+[Script](CreacionTablas/ScripCreacion.txt)
 
 
 ## Este es nuestro diagrama de base de datos en SQL
