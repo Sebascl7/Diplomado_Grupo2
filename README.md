@@ -4,6 +4,9 @@
 
 [Script de creacion de tablas](CreacionTablas/ScripCreacion.txt)
 
+## Este es nuestro Script de iNSERCCION de tablas de la base de datos en SQL
+
+[Script de INSERCCION de tablas](InserccionDatos/InserccionDatos.txt)
 
 ## Este es nuestro diagrama de base de datos en SQL
 
