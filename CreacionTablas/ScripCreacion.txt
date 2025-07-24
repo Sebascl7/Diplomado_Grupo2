@@ -1,0 +1,256 @@
+CREATE DATABASE DIPLOMADO
+
+CREATE SCHEMA G2
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [G2].[canal_cliente](
+	[id_canal_cliente] [int] IDENTITY(1,1) NOT NULL,
+	[nombre] [varchar](100) NOT NULL,
+	[descripcion] [varchar](500) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_canal_cliente] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [G2].[cargo_trabajador]    Script Date: 8/07/2025 22:01:56 ******/
+SELECT * FROM G2.canal_cliente
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [G2].[cargo_trabajador](
+	[id_cargo_trabajador] [int] IDENTITY(1,1) NOT NULL,
+	[nombre] [varchar](100) NOT NULL,
+	[descripcion] [varchar](500) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_cargo_trabajador] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [G2].[categoria_producto]    Script Date: 8/07/2025 22:01:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [G2].[categoria_producto](
+	[id_categoria_producto] [int] IDENTITY(1,1) NOT NULL,
+	[nombre_categoria] [varchar](100) NOT NULL,
+	[codigo_categoria] [varchar](20) NOT NULL,
+	[descripcion] [varchar](500) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_categoria_producto] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [G2].[cliente]    Script Date: 8/07/2025 22:01:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [G2].[cliente](
+	[id_cliente] [int] IDENTITY(1,1) NOT NULL,
+	[nombre_cliente] [varchar](150) NOT NULL,
+	[numero_documento] [varchar](20) NOT NULL,
+	[correo] [varchar](100) NULL,
+	[telefono] [varchar](15) NULL,
+	[direccion] [varchar](500) NULL,
+	[id_tipo_documento] [int] NULL,
+	[id_canal_cliente] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_cliente] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [G2].[detalle_pedido]    Script Date: 8/07/2025 22:01:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [G2].[detalle_pedido](
+	[id_detalle_pedido] [int] IDENTITY(1,1) NOT NULL,
+	[id_pedido] [int] NOT NULL,
+	[id_producto] [int] NOT NULL,
+	[id_promocion] [int] NULL,
+	[cantidad] [int] NOT NULL,
+	[precio_unitario] [decimal](10, 2) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_detalle_pedido] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [G2].[formato_producto]    Script Date: 8/07/2025 22:01:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [G2].[formato_producto](
+	[id_formato_producto] [int] IDENTITY(1,1) NOT NULL,
+	[codigo_formato_producto] [varchar](20) NOT NULL,
+	[tamaño] [int] NOT NULL,
+	[id_tipo_formato] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_formato_producto] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [G2].[marca_producto]    Script Date: 8/07/2025 22:01:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [G2].[marca_producto](
+	[id_marca_producto] [int] IDENTITY(1,1) NOT NULL,
+	[codigo_marca] [varchar](10) NOT NULL,
+	[nombre_marca] [varchar](100) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_marca_producto] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [G2].[pedido]    Script Date: 8/07/2025 22:01:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [G2].[pedido](
+	[id_pedido] [int] IDENTITY(1,1) NOT NULL,
+	[fecha] [date] NOT NULL,
+	[id_trabajador] [int] NOT NULL,
+	[id_cliente] [int] NOT NULL,
+	[id_tipo_pago] [int] NOT NULL,
+	[monto_total] [decimal](10, 2) NULL,
+	[estado] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_pedido] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [G2].[producto]    Script Date: 8/07/2025 22:01:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [G2].[producto](
+	[id_producto] [int] IDENTITY(1,1) NOT NULL,
+	[nombre_producto] [varchar](200) NOT NULL,
+	[descripcion] [varchar](1000) NULL,
+	[id_categoria_producto] [int] NOT NULL,
+	[id_marca_producto] [int] NOT NULL,
+	[id_formato_producto] [int] NOT NULL,
+	[precio] [decimal](10, 2) NULL,
+	[cantidades_uxp] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_producto] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [G2].[promocion]    Script Date: 8/07/2025 22:01:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [G2].[promocion](
+	[id_promocion] [int] IDENTITY(1,1) NOT NULL,
+	[id_tipo_promocion] [int] NOT NULL,
+	[nombre] [varchar](100) NULL,
+	[accion] [varchar](200) NULL,
+	[condicion] [varchar](max) NULL,
+	[fecha_inicio] [date] NULL,
+	[fecha_fin] [date] NULL,
+	[estado] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_promocion] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [G2].[tipo_documento]    Script Date: 8/07/2025 22:01:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [G2].[tipo_documento](
+	[id_tipo_documento] [int] IDENTITY(1,1) NOT NULL,
+	[nombre] [varchar](50) NOT NULL,
+	[descripcion] [varchar](500) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_tipo_documento] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [G2].[tipo_formato]    Script Date: 8/07/2025 22:01:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [G2].[tipo_formato](
+	[id_tipo_formato] [int] IDENTITY(1,1) NOT NULL,
+	[nombre_tipo] [varchar](20) NOT NULL,
+	[descripcion] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_tipo_formato] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [G2].[tipo_pago]    Script Date: 8/07/2025 22:01:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [G2].[tipo_pago](
+	[id_tipo_pago] [int] IDENTITY(1,1) NOT NULL,
+	[nombre_tipo_pago] [varchar](50) NOT NULL,
+	[descripcion] [varchar](500) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_tipo_pago] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [G2].[tipo_promocion]    Script Date: 8/07/2025 22:01:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [G2].[tipo_promocion](
+	[id_tipo_promocion] [int] IDENTITY(1,1) NOT NULL,
+	[nombre_tipo] [varchar](50) NOT NULL,
+	[descripcion] [varchar](100) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_tipo_promocion] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [G2].[trabajador]    Script Date: 8/07/2025 22:01:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [G2].[trabajador](
+	[id_trabajador] [int] IDENTITY(1,1) NOT NULL,
+	[id_cargo_trabajador] [int] NULL,
+	[telefono] [varchar](15) NULL,
+	[correo] [varchar](100) NULL,
+	[nombre] [varchar](150) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_trabajador] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [G2].[canal_cliente] ON 
